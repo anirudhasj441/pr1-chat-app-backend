@@ -1,10 +1,22 @@
 from rest_framework.serializers import ModelSerializer, ValidationError
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class userSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'first_name', 'last_name']
+        fields = [
+            'username', 
+            'email', 
+            'password', 
+            'first_name', 
+            'last_name',
+            'phone_number',
+            'dob',
+            'profile_pic'
+        ]
         extra_kwargs = {'password': {'write_only': True}}
 
     def validate(self, data):
@@ -26,9 +38,11 @@ class userSerializer(ModelSerializer):
             email = validated_data["email"],
             first_name = validated_data["first_name"],
             last_name = validated_data["last_name"],
-            password=validated_data["password"]
+            phone_number=validated_data['phone_number'],
+            dob=validated_data['dob'],
+            password=validated_data["password"],
+
         )
         return user
-    
 
         
