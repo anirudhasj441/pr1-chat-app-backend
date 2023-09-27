@@ -7,6 +7,7 @@ urlpatterns = [
     path('register', views.RegisterUser.as_view()),
     path('login', views.LoginUser.as_view()),
     path('logout', views.LogOutUser.as_view()),
-    path('verify', views.VerifyUser.as_view())
+    path('verify', views.VerifyUser.as_view()),
+    path('availibility', views.UserAvailability.as_view())
     
 ]

@@ -33,6 +33,20 @@ class VerifyUser(APIView):
         user = User.objects.get(username=request.user)
         serializer = userSerializer(user)
         return Response(serializer.data)
+    
+class UserAvailability(APIView):
+    def post(self, request):
+        data = request.data
+        user = User.objects.filter(username = data['username']).first()
+        if user is None:
+            return Response({
+                'user_available': True
+            }, status.HTTP_200_OK)
+            
+        return Response({
+            'user_available': False
+        }, status.HTTP_200_OK)
+
 
 class RegisterUser(APIView):
     def post(self, request):
