@@ -47,6 +47,18 @@ class UserAvailability(APIView):
             'user_available': False
         }, status.HTTP_200_OK)
 
+class ChackPhoneNumber(APIView):
+    def post(self, request):
+        data = request.data
+        user = User.objects.filter(phone_number=data['phone_number']).first()
+        if user is None:
+            return Response({
+                'phone_number_exists': False
+            }, status.HTTP_200_OK)
+        
+        return Response({
+            'phone_number_exists': True
+        }, status.HTTP_200_OK)
 
 class RegisterUser(APIView):
     def post(self, request):
