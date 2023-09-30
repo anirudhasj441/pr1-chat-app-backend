@@ -94,7 +94,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': str(Path.joinpath(BASE_DIR, 'my.cnf'))
+            'read_default_file': '/var/opt/pr1-chatapp/my.cnf'
         }
     }
 }
