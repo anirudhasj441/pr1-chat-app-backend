@@ -19,6 +19,7 @@ def profilePicPath(obj, filename:str):
 class CustomUser(AbstractUser):
     phone_number = models.CharField(max_length=12, unique=True)
     dob = models.DateField(null=True, blank=True)
+    about = models.CharField(max_length=140, null=True, blank=True)
     profile_pic = models.ImageField(upload_to=profilePicPath, null=True, blank=True)
     REQUIRED_FIELDS = []
 

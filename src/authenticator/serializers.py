@@ -14,6 +14,7 @@ class userSerializer(ModelSerializer):
             'first_name', 
             'last_name',
             'phone_number',
+            'about',
             'dob',
             'profile_pic'
         ]
