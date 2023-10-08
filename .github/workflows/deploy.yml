@@ -10,7 +10,7 @@ jobs:
     - name: rsync deployments
       uses: burnett01/rsync-deployments@6.0.0
       with:
-        switches: -avzP --delete
+        switches: -avzP
         path: ./*
         remote_path: /home/devil/chatapp_backend
         remote_host: ${{ secrets.DEPLOY_SERVER_HOST }}
