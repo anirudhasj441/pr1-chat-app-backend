@@ -12,6 +12,9 @@ from django.contrib.auth import authenticate, logout
 from django.conf import settings
 from django.middleware import csrf
 from django.contrib.auth import get_user_model
+from django.db.models.signals import pre_save, post_delete
+from django.dispatch import receiver
+import os
 
 User = get_user_model()
 
@@ -140,4 +143,16 @@ class LogOutUser(APIView):
         })
 
 
+# signals
+@receiver(pre_save, sender=User)
+def deleteOldProfilePic(sender, instance, **kwargs):
+    profilePicPath = instance.__class__.objects.get(id=instance.id).profile_pic
+    print("ProfilePic: ", profilePicPath)
+    print(profilePicPath == '')
+    if profilePicPath == '':
+        return
+    if os.path.exists(profilePicPath.path):
+        os.remove(profilePicPath.path)
 
+# @receiver(post_delete, sender=User)
+# def deleteProfilePic(sender, instance, **kwargs):
