@@ -9,7 +9,7 @@ from authenticator.manager import UserManager
 def profilePicPath(obj, filename:str):
     ext = filename.split('.')[-1]
     return \
-        f'uploads/{obj.user.username}/profile_pictures/profile_picture.{ext}'
+        f'uploads/{obj.username}/profile_pictures/profile_picture.{ext}'
 
 # class UserExtend(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -82,7 +82,25 @@ class RegisterUser(APIView):
             'access': str(refresh.access_token),
             'message': 'Successfull'
         })
-    
+
+class UpdateUser(APIView):
+    permission_classes = [IsAuthenticated]
+    def patch(self, request):
+        # data = request.data
+        serializer = userSerializer(request.user, data=request.data, partial=True)
+        if not serializer.is_valid():
+            return Response({
+                'status': 500, 
+                'error': serializer.errors, 
+                'message': "something went wrong"
+            }, status.HTTP_200_OK)
+
+        serializer.save()
+        return Response({
+            'user': serializer.data,
+            'message': 'Details updated successfully'
+        })
+
 class LoginUser(APIView):
     def post(self, request):
         data = request.data

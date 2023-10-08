@@ -26,6 +26,8 @@ class userSerializer(ModelSerializer):
             'first_name',
             'last_name'
         ]
+        if self.partial:
+            return data
         
         for field in required_fields:
             if field not in data.keys():
