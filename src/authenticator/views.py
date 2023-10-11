@@ -147,8 +147,9 @@ class LogOutUser(APIView):
 @receiver(pre_save, sender=User)
 def deleteOldProfilePic(sender, instance, **kwargs):
     profilePicPath = instance.__class__.objects.get(id=instance.id).profile_pic
-    print("ProfilePic: ", profilePicPath)
-    print(profilePicPath == '')
+    newProfilePicPath = instance.profile_pic
+    if profilePicPath == newProfilePicPath:
+        return
     if profilePicPath == '':
         return
     if os.path.exists(profilePicPath.path):
