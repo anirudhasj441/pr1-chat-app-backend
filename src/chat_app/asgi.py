@@ -11,6 +11,19 @@ import os
 
 from django.core.asgi import get_asgi_application
 
+from channels.routing import ProtocolTypeRouter, URLRouter
+from django.urls import path
+
+from messanger import consumers
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chat_app.settings')
 
 application = get_asgi_application()
+
+ws_patterns = [
+    path('ws/test/', consumers.ChatConsumer.as_asgi())
+]
+
+application = ProtocolTypeRouter({
+    'websocket': URLRouter(ws_patterns)
+})
