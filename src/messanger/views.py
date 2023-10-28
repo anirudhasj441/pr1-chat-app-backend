@@ -4,6 +4,7 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from rest_framework.permissions import IsAuthenticated
 from authenticator.serializers import userSerializer
 import time
 
@@ -30,8 +31,8 @@ class index(APIView):
     
 class search(APIView):
 
+    permission_classes = [IsAuthenticated]
     def post(self, request):
-
         data = request.data
         s = data["s"]
         result = User.objects.filter(
