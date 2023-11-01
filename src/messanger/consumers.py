@@ -26,7 +26,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.room_name,
             self.channel_name
         )
-        await self.send(text_data=json.dumps({'message': 'Bye!'}))
+        # await self.send(text_data=json.dumps({'message': 'Bye!'}))
 
     async def sendCounter(self, event):
         print("Called send Counter")
